@@ -14,6 +14,21 @@ Institution registration → FDR upload → OCR extraction → automatic validat
 
 ---
 
+## ▶ Demo video
+
+[![SurakshaFD walkthrough video: click to watch on YouTube](https://img.youtube.com/vi/TdojHO2k8wA/maxresdefault.jpg)](https://youtu.be/TdojHO2k8wA)
+
+**[Watch the 4½-minute walkthrough on YouTube](https://youtu.be/TdojHO2k8wA)**: the complete workflow running live on the real prototype.
+
+| | |
+|---|---|
+| **Length** | 4 min 33 s · 1920×1080 · English narration with captions |
+| **Shows** | All 11 workflow steps: institution login → FDR upload → real OCR extraction → automatic mismatch detection → correction & submission → AICTE officer review → simulated bank verification → dashboards & deadline alerts → clearance request → officer recommendation + separate senior approval → audit trail |
+| **Data** | Fictional sample FDRs, banks and institutions. Bank verification is **simulated**, and the approval shown is a **demonstration only**: no funds are released. |
+| **Narration** | AI-generated voice (offline [Piper](https://github.com/rhasspy/piper) text-to-speech, public-domain `en_US-john-medium` voice) |
+
+---
+
 ## Contents
 1. [What's inside](#1-whats-inside)
 2. [Quick start on Windows (recommended)](#2-quick-start-on-windows-recommended)
@@ -201,6 +216,7 @@ e2e\run-smoke-test.bat          &REM add --show to watch it
 
 ## 8. Five-minute judge demo
 
+- **[Demo video on YouTube](https://youtu.be/TdojHO2k8wA)**: the full recorded walkthrough (see [Demo video](#-demo-video) above).
 - **[JUDGE_DEMO.md](JUDGE_DEMO.md)**: **live Judge Demonstration Mode.** Demo 1 (real OCR + validation) and Demo 2
   (multi-role workflow in three browser tabs), plus how to show API calls, server logs and database changes as proof.
 - **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)**: the original single-thread 11-step walkthrough with talking points.
@@ -216,59 +232,17 @@ e2e\run-smoke-test.bat          &REM add --show to watch it
 - **Judge files**: `JUDGE_DEMO1_*` (PDF + phone photo) and `JUDGE_DEMO2_*` (a second bank layout) in `sample_documents\`.
 - Turn it off for anything other than a local demo with `DEMO_MODE=false` in `backend\.env`.
 
-### Walkthrough video
-`video\SurakshaFD_Walkthrough.mp4`: **4 min 33 s, 1920×1080**, all 11 workflow steps on the real running app.
-- **Male AI narration** in English, at about 1.25× pace: offline [Piper](https://github.com/rhasspy/piper) voice
-  `en_US-john-medium` (public-domain LibriVox recordings). It was chosen with `e2e\voice_bench.py` as the clearest male
-  voice by speech-recognition accuracy.
-- **Captions in a dedicated band below the website**, so they never cover the app (plus a `.srt` file for YouTube).
-- Subtle zoom-ins on key results, quick account-switch transitions, very quiet click and keyboard sounds, and a brief
-  closing card.
-- Fictional sample data throughout; bank verification is stated to be simulated, and the approval a demonstration only.
+### Walkthrough video: how it is made
+The [YouTube video](https://youtu.be/TdojHO2k8wA) is generated from the real app by `e2e\make_video.py`. Nothing in it is a mock-up screen:
+- Microsoft Edge runs the actual prototype (FastAPI, database, Tesseract OCR) and is recorded at 1080p.
+- **Male AI narration**, about 1.25× pace: Piper voice `en_US-john-medium`, chosen with `e2e\voice_bench.py` as the
+  clearest male voice by speech-recognition accuracy.
+- **Captions sit in a band below the website**, so they never cover the app. Subtle zoom-ins, quiet click and keyboard
+  sounds, and a brief closing card.
 
-To regenerate it, double-click **`make-video.bat`** (about 10 minutes). Narration and captions come from the `d.say(...)`
-lines in `e2e\make_video.py` (`walkthrough()`). `make_video.py --encode-only` re-edits the last recording.
-
-### Judge Demonstration Mode
-- **Live Evidence** button (top bar): a drawer showing the real API requests FastAPI received, live database row
-  counts and latest rows, and the newest audit entries. It refreshes every 2 s and respects data isolation (an institution
-  sees only its own). Every request is also printed in the backend window and written to `backend\data\logs\api.log`.
-- **Per-tab sign-in**: each browser tab keeps its own session, so institution, officer and senior can sit side by side.
-- **Safe reset**: `reset-demo.bat` asks for confirmation and backs up the database to `backend\data\backups\` first.
-  Admins can also reset from the Live Evidence panel by typing `RESET`.
-- **`inspect-db.bat`**: prints live row counts, latest FDRs and latest audit entries straight from the database file.
-- **Judge files**: `JUDGE_DEMO1_*` (PDF + phone photo) and `JUDGE_DEMO2_*` (a second bank layout) in `sample_documents\`.
-- Turn it off for anything other than a local demo with `DEMO_MODE=false` in `backend\.env`.
-
-### Walkthrough video (narrated, with captions)
-`video\SurakshaFD_Walkthrough.mp4` is a ~7 min, 1080p recording of the full demo with:
-- **on-screen captions** for every step (plus `SurakshaFD_Walkthrough.srt` for YouTube subtitles)
-- **female AI narration** in English: offline [Piper](https://github.com/rhasspy/piper) text-to-speech, voice
-  `en_US-ljspeech-high`, trained on the public-domain LJSpeech dataset
-- **subtle mouse-click and keystroke sounds**, generated in code, timed to the on-screen cursor
-- sample files picked through a visible **Open** dialog that lists the real `sample_documents` files. The dialog is
-  drawn by the recorder, because Windows' own dialog can't be captured; the upload itself is the real browser file chooser.
-
-To regenerate it, double-click **`make-video.bat`**. It resets the demo data, records in Microsoft Edge and mixes the
-audio (about 10 minutes; the first run also downloads the ~110 MB voice model). To change wording, edit the captions in
-`e2e\make_video.py` (`walkthrough()`); the narration is read from the same captions. `make_video.py --encode-only`
-re-mixes and re-encodes from the last recording without capturing again.
-
-### Judge Demonstration Mode
-- **Live Evidence** button (top bar): a drawer showing the real API requests FastAPI received, live database row
-  counts and latest rows, and the newest audit entries. It refreshes every 2 s and respects data isolation (an institution
-  sees only its own). Every request is also printed in the backend window and written to `backend\data\logs\api.log`.
-- **Per-tab sign-in**: each browser tab keeps its own session, so institution, officer and senior can sit side by side.
-- **Safe reset**: `reset-demo.bat` asks for confirmation and backs up the database to `backend\data\backups\` first.
-  Admins can also reset from the Live Evidence panel by typing `RESET`.
-- **`inspect-db.bat`**: prints live row counts, latest FDRs and latest audit entries straight from the database file.
-- **Judge files**: `JUDGE_DEMO1_*` (PDF + phone photo) and `JUDGE_DEMO2_*` (a second bank layout) in `sample_documents\`.
-- Turn it off for anything other than a local demo with `DEMO_MODE=false` in `backend\.env`.
-
-### Walkthrough video (captions, no voice)
-`video\SurakshaFD_Walkthrough.mp4` is a ~4 min 40 s, 1080p recording of the full demo, with on-screen captions, a visible cursor and highlighted elements. `video\SurakshaFD_Walkthrough.srt` holds the same captions as a subtitle file (useful for YouTube).
-
-To regenerate it after changing the app, double-click **`make-video.bat`**. It resets the demo data, starts the servers if needed, records in Microsoft Edge, and encodes the MP4 (about 6 minutes in total). Captions and pacing are in `e2e\make_video.py`, in the `walkthrough()` function.
+To regenerate it, double-click **`make-video.bat`** (about 10 minutes; the first run downloads the voice model). It writes
+`video\SurakshaFD_Walkthrough.mp4` and a `.srt` subtitle file locally. The `video\` folder is not committed. Narration
+and captions come from the `d.say(...)` lines in `walkthrough()`; `make_video.py --encode-only` re-edits the last recording.
 
 ---
 

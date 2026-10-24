@@ -3,6 +3,8 @@
 Two live demonstrations that run on the real FastAPI server, Tesseract OCR and the SQLite database, plus
 the commands to prove it if judges ask. Nothing in either demo is a hard-coded frontend response.
 
+> **Recorded walkthrough:** https://youtu.be/TdojHO2k8wA (4 min 33 s). Keep it open as a fallback in case the live setup fails.
+
 > All institutions, banks and amounts are fictional. **Bank verification is SIMULATED**: no bank is contacted,
 > and the UI labels it that way everywhere. A clearance approval only records a decision; it releases no money.
 
