@@ -1,0 +1,7 @@
+# Keep Windows batch files with CRLF line endings (they can misbehave with LF)
+*.bat text eol=crlf
+# Binary assets
+*.png binary
+*.jpg binary
+*.pdf binary
+*.pptx binary

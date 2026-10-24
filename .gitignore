@@ -1,0 +1,38 @@
+# Python
+backend/.venv/
+e2e/.venv/
+__pycache__/
+.pytest_cache/
+backend/.env
+
+# Runtime data (database + uploaded documents)
+backend/data/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Test output
+e2e/screenshots/
+video/_raw/
+e2e/.pw-browsers/
+e2e/.voices/
+e2e/.tts_cache/
+
+# Demo video (share via YouTube/Drive or a GitHub Release instead; 50+ MB)
+video/
+
+# Logs and personal notes
+*.log
+e2e/video_log.txt
+Prompt.txt
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Presentation deck (kept locally, not in the repo)
+*.pptx

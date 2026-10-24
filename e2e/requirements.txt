@@ -1,0 +1,4 @@
+playwright==1.49.1
+imageio-ffmpeg==0.5.1
+piper-tts==1.8.0
+Pillow
