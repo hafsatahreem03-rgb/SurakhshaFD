@@ -11,6 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
 COPY tests ./tests
 COPY pytest.ini .
+# SQLite cannot create its own parent folder; Docker Compose mounts a volume here, Render does not.
+RUN mkdir -p /app/data/uploads /app/sample_documents
 
 ENV DATABASE_URL=sqlite:////app/data/surakshafd.db \
     STORAGE_DIR=/app/data/uploads \
