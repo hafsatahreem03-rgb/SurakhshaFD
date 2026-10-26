@@ -223,7 +223,7 @@ export default function EvidencePanel() {
 
             <footer className="flex flex-wrap items-center gap-2 border-t border-slate-200 bg-slate-50 px-4 py-3 text-xs">
               <Badge tone="amber" dot={false}>Bank adapter: {config.bank_adapter}</Badge>
-              <a className="btn-outline btn-sm ml-auto" href="http://localhost:8000/docs" target="_blank" rel="noreferrer"><ExternalLink className="h-3.5 w-3.5" />API docs</a>
+              <a className="btn-outline btn-sm ml-auto" href={import.meta.env.DEV ? "http://localhost:8000/docs" : "/docs"} target="_blank" rel="noreferrer"><ExternalLink className="h-3.5 w-3.5" />API docs</a>
               {user?.role === "admin" && (
                 <button className="btn-danger btn-sm" onClick={() => setResetOpen(true)}><RotateCcw className="h-3.5 w-3.5" />Reset demo data</button>
               )}

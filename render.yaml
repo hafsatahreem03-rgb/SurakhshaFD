@@ -1,0 +1,17 @@
+# Render Blueprint for the SurakshaFD API (New -> Blueprint -> pick this repo).
+# The frontend is deployed separately on Vercel; frontend/vercel.json proxies /api to this service.
+services:
+  - type: web
+    name: surakshafd-api
+    runtime: docker
+    plan: free
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALERT_INTERVAL_MINUTES
+        value: "60"
+      - key: BANK_ADAPTER
+        value: simulated

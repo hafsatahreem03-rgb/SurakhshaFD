@@ -18,5 +18,5 @@ ENV DATABASE_URL=sqlite:////app/data/surakshafd.db \
     PYTHONUNBUFFERED=1
 
 EXPOSE 8000
-# Load the fictional demo data on first start, then run the API.
-CMD ["sh", "-c", "python -m app.cli ensure-demo && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+# Load the fictional demo data on first start, then run the API. Render sets PORT; Docker Compose uses 8000.
+CMD ["sh", "-c", "python -m app.cli ensure-demo && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

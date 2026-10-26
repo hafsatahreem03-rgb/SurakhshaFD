@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://surakshafd-api.onrender.com/api/:path*" },
+    { "source": "/docs", "destination": "https://surakshafd-api.onrender.com/docs" },
+    { "source": "/openapi.json", "destination": "https://surakshafd-api.onrender.com/openapi.json" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
